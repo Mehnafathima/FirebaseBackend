@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "102614265328",
+    "project_id": "login-auth-21ee2",
+    "storage_bucket": "login-auth-21ee2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102614265328:android:2de505b0cf9637c6598135",
+        "android_client_info": {
+          "package_name": "com.example.login_authentication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGklX__JyTVsIaMj1O7Jpx7UKbpQueGsk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
