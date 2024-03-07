@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: Colors.deepPurple,
           title: Center(
             child: Text(
-              'Incorrect Email',
+              'Wrong Email',
               style: TextStyle(color: Colors.white),
             ),
           ),
@@ -215,14 +215,14 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'be a member?',
+                      'be a member please?',
                       style: TextStyle(color: Colors.grey[700]),
                     ),
                     const SizedBox(width: 4),
                     GestureDetector(
                       onTap: (){},
                       child: const Text(
-                        'Register now',
+                        'Register here',
                         style: TextStyle(
                           color: Color.fromARGB(255, 114, 93, 189),
                           fontWeight: FontWeight.bold,
