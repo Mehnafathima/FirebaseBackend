@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                 // email textfield
                 MyTextField(
                   controller: emailController,
-                  hintText: 'Email',
+                  hintText: 'email',
                   obscureText: false,
                 ),
 
