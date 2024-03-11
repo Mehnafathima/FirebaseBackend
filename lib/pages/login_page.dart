@@ -160,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: signUserIn,
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 1),
 
                 // or continue with
                 Padding(
@@ -182,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       Expanded(
                         child: Divider(
-                          thickness: 0.5,
+                          thickness: 0.6,
                           color: Colors.grey[400],
                         ),
                       ),
