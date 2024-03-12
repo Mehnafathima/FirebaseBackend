@@ -36,9 +36,11 @@ class _LoginPageState extends State<LoginPage> {
         password: passwordController.text,
       );
       // pop the loading circle
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       // pop the loading circle
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
       // WRONG EMAIL
       if (e.code == 'user-not-found') {
@@ -137,8 +139,8 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 10),
 
                 // forgot password?
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -211,26 +213,26 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 20),
 
                 // not a member? register now
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'be a member please?',
-                      style: TextStyle(color: Colors.grey[700]),
-                    ),
-                    const SizedBox(width: 4),
-                    GestureDetector(
-                      onTap: (){},
-                      child: const Text(
-                        'Register here',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 114, 93, 189),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Text(
+                //       'be a member please?',
+                //       style: TextStyle(color: Colors.grey[700]),
+                //     ),
+                //     const SizedBox(width: 4),
+                //     GestureDetector(
+                //       onTap: (){},
+                //       child: const Text(
+                //         'Register here',
+                //         style: TextStyle(
+                //           color: Color.fromARGB(255, 114, 93, 189),
+                //           fontWeight: FontWeight.bold,
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // )
               ],
             ),
           ),

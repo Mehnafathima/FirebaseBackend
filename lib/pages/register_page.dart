@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_authentication/components/my_button.dart';
 import 'package:login_authentication/components/my_textfield.dart';
-import 'package:login_authentication/components/square_tile.dart';
+// import 'package:login_authentication/components/square_tile.dart';
 import 'package:lottie/lottie.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -136,8 +136,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 10),
 
                 // forgot password?
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [

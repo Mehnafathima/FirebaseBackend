@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_authentication/pages/auth_page.dart';
-import 'package:login_authentication/pages/login_page.dart';
+// import 'package:login_authentication/pages/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -18,14 +18,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      
-      debugShowCheckedModeBanner: true,
-      home: const AuthPage(),
-      routes: {
-            '/login': (context) => LoginPage(), 
+    return  const MaterialApp(
+      //  theme: ThemeData(
+      //   primaryColor: Colors.blueGrey[50], // Set your primary color
+       
+      // ),
+      debugShowCheckedModeBanner: false,
+      home: AuthPage(),
+      // routes: {
+      //       '/login': (context) => LoginPage(), 
 
-      },
+      // },
     );
   }
 }

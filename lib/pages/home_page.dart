@@ -1,5 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:login_authentication/components/bottom_nav_bar.dart';
+import 'package:login_authentication/pages/note_page.dart';
+import 'package:login_authentication/pages/to_do_page.dart';
+
 import 'package:lottie/lottie.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,33 +13,39 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  Future<void> logout() async {
-  try {
-    await FirebaseAuth.instance.signOut();
-    // Navigate to login screen or desired post-logout destination
-    Navigator.pushReplacementNamed(context, '/login'); // Replace with your route name
-  } on FirebaseAuthException catch (e) {
-    // Handle potential errors (optional)
-    print(e.message); // Log the error message for debugging
-    // Display an error message to the user (optional)
+  int _selectedIndex = 0;
+  void navigateBottomBar(int index){
+    setState(() {
+          _selectedIndex = index;
+    });
   }
-}
+  final List<Widget> _pages = [
+  const NotePage(),
+  const TodoPage(),
+  ];
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: Lottie.asset(
+      // backgroundColor: Colors.grey[100],
+        leading: Lottie.asset(
           'assets/lottie/cat.json',
           height: MediaQuery.of(context).size.height * 0.05,
         ),
+        title: const Center(child: Text("FIX IT")),
         actions: [
           IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: logout, // Call the logout function when tapped
+            color: Colors.deepPurple,
+            icon: const Icon(Icons.logout),
+            onPressed: () {}, // Call the logout function when tapped
           ),
         ],
       ),
-      body: Center(child: Lottie.asset('assets/lottie/cat.json')),
+      bottomNavigationBar:  BottomNavBar(
+        onTabChange: (index) => navigateBottomBar(index),
+      ),
     );
   }
 }
