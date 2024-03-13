@@ -8,6 +8,7 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Container(
+      color: Colors.white,
       child:  Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: GNav(
@@ -32,7 +33,9 @@ class BottomNavBar extends StatelessWidget {
           ),
           GButton(
           icon: Icons.headphones,
-          text: "To Do"
+          text: "To Do",
+          textColor: Colors.white38,
+
           )
         ]
         ),

@@ -5,9 +5,8 @@ class TodoPage extends StatelessWidget {
 
   @override
  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text(
-      "hello"),
+    return  const Center(
+      child: Text("to do babe's"),
     );
   }
 }
