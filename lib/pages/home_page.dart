@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       // backgroundColor: Colors.grey[100],
       appBar: AppBar(
-      backgroundColor: Colors.transparent,
+      // backgroundColor: Colors.deepPurple[300],
       elevation: 0,
         leading: Lottie.asset(
           'assets/lottie/cat.json',
