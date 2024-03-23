@@ -41,6 +41,7 @@ dependencies:
   google_nav_bar: ^5.0.6
   cloud_firestore: ^4.15.8
   flutter_quill: 8.6.4
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
