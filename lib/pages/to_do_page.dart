@@ -79,7 +79,7 @@ class PomoPage extends StatelessWidget {
                 builder: (context, timerState, _) {
                   return Column(
                     children: [
-                      SizedBox(height: 20),
+                      SizedBox(height: 18),
                       Text(
                         '${timerState.hours} h ${timerState.minutes} m ${timerState.seconds} s left',
                         style: TextStyle(
