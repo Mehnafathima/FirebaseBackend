@@ -39,7 +39,7 @@ class BottomNavBar extends StatelessWidget {
           ),
           GButton(
           icon: Icons.headphones,
-          text: "To Do",
+          text: "Pomodoro",
           textColor: Colors.white38,
 
           )

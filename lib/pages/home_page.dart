@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:login_authentication/components/bottom_nav_bar.dart';
 import 'package:login_authentication/pages/note_page.dart';
 import 'package:login_authentication/pages/to_do_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 import 'package:lottie/lottie.dart';
 
@@ -21,8 +23,15 @@ class _HomePageState extends State<HomePage> {
   }
   final List<Widget> _pages = [
   const NotePage(),
-   PomoPage(),
+   const PomoPage(),
   ];
+   final user = FirebaseAuth.instance.currentUser!;
+
+  // sign user out method
+  void signUserOut() {
+    FirebaseAuth.instance.signOut();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             color: Colors.deepPurple,
             icon: const Icon(Icons.logout),
-            onPressed: () {}, // Call the logout function when tapped
+            onPressed: signUserOut, // Call the logout function when tapped
           ),
         ],
       ),

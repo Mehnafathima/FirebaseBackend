@@ -3,13 +3,17 @@ import 'package:provider/provider.dart';
 import 'dart:async';
 
 // Define a class to hold the timer state
-class TimerState extends ChangeNotifier {
+class TimerModel extends ChangeNotifier {
   Timer? _timer;
   late int _hours;
   late int _minutes;
   late int _seconds;
   bool _isPaused = false;
-
+TimerModel() {
+    _hours = 0;
+    _minutes = 0;
+    _seconds = 0;
+  }
   // Getters for accessing timer state
   int get hours => _hours;
   int get minutes => _minutes;
@@ -50,6 +54,10 @@ class TimerState extends ChangeNotifier {
   // Method to reset and replay the timer
   void replayTimer(int minutes) {
     _isPaused = false;
+    _hours = 0;
+    _minutes = 0;
+    _seconds = 0;
+    notifyListeners(); // Notify listeners of state change
     startTimer(minutes);
   }
 
@@ -59,51 +67,66 @@ class TimerState extends ChangeNotifier {
   }
 }
 
-class PomoPage extends StatelessWidget {
-  const PomoPage({super.key});
+class PomoPage extends StatefulWidget {
+  const PomoPage({Key? key}) : super(key: key);
 
+  @override
+  _PomoPageState createState() => _PomoPageState();
+}
+
+class _PomoPageState extends State<PomoPage> {
+  final TimerModel _timerModel = TimerModel();
+
+  @override
+  void dispose() {
+    _timerModel.disposeTimer();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => TimerState(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Pomodoro Timer'),
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: Consumer<TimerState>(
+    return Scaffold(
+      // appBar: AppBar(
+      //   title: Center(child: const Text('Pomodoro')),
+      // ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: ChangeNotifierProvider(
+              create: (context) => _timerModel,
+              child: Consumer<TimerModel>(
                 builder: (context, timerState, _) {
                   return Column(
                     children: [
-                      SizedBox(height: 18),
-                      Text(
-                        '${timerState.hours} h ${timerState.minutes} m ${timerState.seconds} s left',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                      const SizedBox(height: 18),
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 500),
+                        child: Text(
+                          '${timerState.hours} h ${timerState.minutes} m ${timerState.seconds} s left',
+                          key: ValueKey<int>(timerState.seconds),
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
-                            onPressed: () => timerState.pauseTimer(),
-                            icon: Icon(Icons.pause),
-                            iconSize: 48,
-                          ),
-                          IconButton(
-                            onPressed: () => timerState.resumeTimer(),
-                            icon: Icon(Icons.play_arrow),
+                            onPressed: () => _toggleTimer(timerState),
+                            icon: Icon(
+                              timerState.isPaused
+                                  ? Icons.play_arrow
+                                  : Icons.pause,
+                            ),
                             iconSize: 48,
                           ),
                           IconButton(
                             onPressed: () => timerState.replayTimer(25),
-                            icon: Icon(Icons.replay),
+                            icon: const Icon(Icons.replay),
                             iconSize: 48,
                           ),
                         ],
@@ -113,22 +136,23 @@ class PomoPage extends StatelessWidget {
                 },
               ),
             ),
-            Expanded(
-              flex: 2,
-              child: GridView.count(
-                crossAxisCount: 3,
-                children: [
-                  _buildTimeOption(context, 5),
-                  _buildTimeOption(context, 15),
-                  _buildTimeOption(context, 30),
-                  _buildTimeOption(context, 60),
-                  _buildTimeOption(context, 90),
-                  _buildTimeOption(context, 120),
-                ],
-              ),
+          ),
+          Expanded(
+            flex: 2,
+            child: GridView.count(
+              crossAxisCount: 3,
+              // childAspectRatio: 1.1,
+              children: [
+                _buildTimeOption(context, 5),
+                _buildTimeOption(context, 15),
+                _buildTimeOption(context, 30),
+                _buildTimeOption(context, 60),
+                _buildTimeOption(context, 90),
+                _buildTimeOption(context, 120),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -138,11 +162,10 @@ class PomoPage extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
-          final timerState = Provider.of<TimerState>(context, listen: false);
-          timerState.startTimer(minutes);
+          _timerModel.replayTimer(minutes);
         },
         child: Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Colors.deepPurple,
@@ -150,7 +173,7 @@ class PomoPage extends StatelessWidget {
           child: Center(
             child: Text(
               '$minutes min',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 color: Colors.white,
               ),
@@ -160,10 +183,18 @@ class PomoPage extends StatelessWidget {
       ),
     );
   }
+
+  void _toggleTimer(TimerModel timerState) {
+    if (timerState.isPaused) {
+      timerState.resumeTimer();
+    } else {
+      timerState.pauseTimer();
+    }
+  }
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: PomoPage(),
   ));
 }
